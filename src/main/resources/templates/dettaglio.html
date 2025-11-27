@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dettaglio Progetto</title>
+</head>
+<body>
+<h1 th:text="'Progetto: ' + ${progetto.nome}"></h1>
+<p><strong>ID:</strong> <span th:text="${progetto.id}"></span></p>
+<p><strong>Responsabile:</strong> <span th:text="${progetto.responsabile != null ? progetto.responsabile.nome : 'N/A'}"></span></p>
+<p><strong>Descrizione:</strong> <span th:text="${progetto.descrizione}"></span></p>
+<p><strong>Inizio:</strong> <span th:text="${progetto.inizio}"></span></p>
+<p><strong>Fine:</strong> <span th:text="${progetto.fine}"></span></p>
+<a th:href="@{/progetti}">Torna alla lista</a>
+</body>
+</html>

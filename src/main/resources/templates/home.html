@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Task Manager</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<header>
+    <h1>Benvenuto nel Task Manager</h1>
+</header>
+
+<main>
+    <div sec:authorize="isAuthenticated()">
+        <p>Utente loggato: <span sec:authentication="name"></span></p>
+        <a th:href="@{/progetti}">Gestione Progetti</a>
+
+        <a class="logout-btn" th:href="@{/logout}">Logout</a>
+
+    </div>
+
+    <div sec:authorize="isAnonymous()">
+        <p>Nessun utente loggato.</p>
+        <a class="login-btn" th:href="@{/login}">Effettua il login</a>
+    </div>
+</main>
+
+<!-- JS -->
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
