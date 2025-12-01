@@ -6,11 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProgettiDto {
+
+  Long id;
 
   String nome;
 
@@ -25,4 +29,6 @@ public class ProgettiDto {
   int indCanc;
 
   LocalDate modDate;
+
+  List<AssegnazioneDto> assegnazioni = new ArrayList<>();
 }
