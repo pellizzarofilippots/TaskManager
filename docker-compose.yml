@@ -1,34 +1,166 @@
+#version: '3.8'
+#services:
+#  task-service:
+#    build:
+#      context: .
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - postgres
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taskdb
+#      SPRING_DATASOURCE_USERNAME: user
+#      SPRING_DATASOURCE_PASSWORD: pass
+#    networks:
+#      - task-network
+#
+#  postgres:
+#    image: postgres:16
+#    environment:
+#      POSTGRES_DB: taskdb
+#      POSTGRES_USER: user
+#      POSTGRES_PASSWORD: pass
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - task-network
+#
+#networks:
+#  task-network:
+#
+#volumes:
+#  pgdata:
+#version: '3.8'
+#
+#services:
+#  task-service:
+#    build:
+#      context: . # se il Dockerfile del backend è nella cartella backend
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taskdb
+#      SPRING_DATASOURCE_USERNAME: user
+#      SPRING_DATASOURCE_PASSWORD: pass
+#    networks:
+#      - app-network
+#
+#  frontend:
+#    build:
+#      context: C:/Users/filippo.pellizzaro/task-manager-frontend  # percorso del progetto Angular
+#    ports:
+#      - "4200:80"   # espone la porta 80 del container su 4200 host
+#    depends_on:
+#      - task-service
+#    networks:
+#      - app-network
+#
+##  postgres:
+##    image: postgres:16
+##    environment:
+##      POSTGRES_DB: taskdb
+##      POSTGRES_USER: user
+##      POSTGRES_PASSWORD: pass
+##    volumes:
+##      - pgdata:/var/lib/postgresql/data
+##      - type: bind
+##        source: ./init.sql
+##        target: /docker-entrypoint-initdb.d/init.sql
+##    ports:
+##      - "5432:5432"
+##    healthcheck:
+##      test: [ "CMD-SHELL", "pg_isready -U user -d taskdb" ]
+##      interval: 5s
+##      timeout: 5s
+##      retries: 10
+##    networks:
+##      - app-network
+#
+#  postgres:
+#    image: postgres:16
+#    environment:
+#      POSTGRES_DB: taskdb
+#      POSTGRES_USER: user
+#      POSTGRES_PASSWORD: pass
+#    volumes:
+#      - type: bind
+#        source: ./init.sql
+#        target: /docker-entrypoint-initdb.d/init.sql
+#    ports:
+#      - "5432:5432"
+#    healthcheck:
+#          test: [ "CMD-SHELL", "pg_isready -U user -d taskdb" ]
+#          interval: 5s
+#          timeout: 5s
+#          retries: 10
+#    networks:
+#      - app-network
+#
+#
+#networks:
+#  app-network:
+#
+#volumes:
+#  pgdata:
 version: '3.8'
-services:
-  task-service:
-    build:
-      context: .
-    ports:
-      - "8081:8081"
-    depends_on:
-      - postgres
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taskdb
-      SPRING_DATASOURCE_USERNAME: user
-      SPRING_DATASOURCE_PASSWORD: pass
-    networks:
-      - task-network
 
+services:
   postgres:
     image: postgres:16
     environment:
       POSTGRES_DB: taskdb
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
+      POSTGRES_PASSWORD: test
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./docker/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+#    volumes:
+#      - type: bind
+#        source: C:/Users/filippo.pellizzaro/IdeaProjects/Task_manager/init.sql
+#        target: /docker-entrypoint-initdb.d/init-schema.sql
+    # niente volume persistente, DB parte pulito ogni volta
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d taskdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
-      - task-network
+      - app-network
+
+  task-service:
+    build:
+      context: .   # percorso del backend
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taskdb
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: test
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_LIQUIBASE_ENABLED: "false"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context:  C:/Users/filippo.pellizzaro/task-manager-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - task-service
+    networks:
+      - app-network
 
 networks:
-  task-network:
-
-volumes:
-  pgdata:
+  app-network:

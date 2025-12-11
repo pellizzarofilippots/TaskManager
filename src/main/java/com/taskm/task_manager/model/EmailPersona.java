@@ -33,16 +33,18 @@ public class EmailPersona {
     @JoinColumn(name = "TIPO_ID", nullable = false)
     private TipiEmail tipo;
 
-    @ColumnDefault("0")
+    //@ColumnDefault("0")
     @Column(name = "IS_PEC")
     private Boolean isPec;
 
-    @ColumnDefault("0")
+    //@ColumnDefault("0")
     @Column(name = "IS_SCADUTA")
     private Boolean isScaduta;
 
-    @ColumnDefault("0")
-    @Column(name = "IND_CANC")
+   // @ColumnDefault("0")
+    //@Column(name = "IND_CANC")
+    @Column(name = "ind_canc", columnDefinition = "boolean default false")
+
     private Boolean indCanc;
 
     @ColumnDefault("SYSDATE")

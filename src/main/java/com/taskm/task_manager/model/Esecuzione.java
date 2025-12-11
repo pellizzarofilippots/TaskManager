@@ -38,8 +38,9 @@ public class Esecuzione {
     @Column(name = "NOTE", length = 4000)
     private String note;
 
-    @ColumnDefault("0")
-    @Column(name = "IND_CANC")
+    //@ColumnDefault("0")
+   // @Column(name = "IND_CANC")
+    @Column(name = "ind_canc", columnDefinition = "boolean default false")
     private Boolean indCanc;
 
     @ColumnDefault("SYSDATE")

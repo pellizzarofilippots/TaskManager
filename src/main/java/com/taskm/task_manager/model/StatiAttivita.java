@@ -25,7 +25,7 @@ public class StatiAttivita {
     @Column(name = "ORDINE")
     private Long ordine;
 
-    @ColumnDefault("0")
+    //@ColumnDefault("0")
     @Column(name = "IS_INATTIVA")
     private Boolean isInattiva;
 

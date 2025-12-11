@@ -38,7 +38,7 @@ public class Utenti {
     @Column(name = "CODICE_ATTIVAZIONE", length = 16)
     private String codiceAttivazione;
 
-    @ColumnDefault("0")
+    //@ColumnDefault("0")
     @Column(name = "TENTATIVI_FALLITI")
     private Long tentativiFalliti;
 

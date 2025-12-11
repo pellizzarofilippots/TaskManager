@@ -23,8 +23,10 @@ public class TipiAttivita {
     @Column(name = "ETICHETTA", nullable = false, length = 30)
     private String etichetta;
 
-    @ColumnDefault("0")
-    @Column(name = "IND_CANC")
+    //@ColumnDefault("0")
+   // @Column(name = "IND_CANC")
+    @Column(name = "ind_canc", columnDefinition = "boolean default false")
+
     private Boolean indCanc;
 
 }

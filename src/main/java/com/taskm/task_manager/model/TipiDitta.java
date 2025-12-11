@@ -25,8 +25,10 @@ public class TipiDitta {
     @Column(name = "DESCRIZIONE", nullable = false, length = 100)
     private String descrizione;
 
-    @ColumnDefault("0")
-    @Column(name = "IND_CANC")
+    //@ColumnDefault("0")
+   // @Column(name = "IND_CANC")
+    @Column(name = "ind_canc", columnDefinition = "boolean default false")
+
     private Boolean indCanc;
 
 }

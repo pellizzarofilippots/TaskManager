@@ -40,12 +40,16 @@ public class IndirizziPersona {
     @Column(name = "CAP", length = 5)
     private String cap;
 
-    @ColumnDefault("0")
-    @Column(name = "IND_CANC")
+    //@ColumnDefault("0")
+    //@Column(name = "IND_CANC")
+    @Column(name = "ind_canc", columnDefinition = "boolean default false")
+
     private Boolean indCanc;
 
     @ColumnDefault("SYSDATE")
     @Column(name = "MOD_DATE", nullable = false)
+
+
     private LocalDate modDate;
 
 }

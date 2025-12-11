@@ -54,7 +54,7 @@ public class Dipendenti {
     private Reparti reparto;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.SET_NULL)
+   @OnDelete(action = OnDeleteAction.SET_NULL)
     @JoinColumn(name = "RESPONSABILE_ID")
     private Anagrafica responsabile;
 

@@ -40,12 +40,14 @@ public class Sedi {
     @Column(name = "CAP", length = 5)
     private String cap;
 
-    @ColumnDefault("0")
+    //@ColumnDefault("0")
     @Column(name = "IS_ESTERNA")
     private Boolean isEsterna;
 
-    @ColumnDefault("0")
-    @Column(name = "IND_CANC")
+    //@ColumnDefault("0")
+   // @Column(name = "IND_CANC")
+    @Column(name = "ind_canc", columnDefinition = "boolean default false")
+
     private Boolean indCanc;
 
     @ColumnDefault("SYSDATE")
