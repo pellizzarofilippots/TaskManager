@@ -26,7 +26,7 @@ public class ProgettiDto {
 
   Long responsabileId;
 
-  int indCanc;
+  boolean indCanc;
 
   LocalDate modDate;
 

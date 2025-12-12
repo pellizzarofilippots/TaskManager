@@ -53,7 +53,7 @@ public class ProgettiService {
             dto.setInizio(p.getInizio());
             dto.setFine(p.getFine());
             dto.setResponsabileId(p.getResponsabile().getId());
-            dto.setIndCanc(p.getIndCanc());
+            dto.setIndCanc(p.isIndCanc());
             dto.setModDate(p.getModDate());
 
             // Se vuoi popolare le assegnazioni, qui
@@ -90,7 +90,7 @@ public ProgettiDto findById(Long id) {
     dto.setInizio(p.getInizio());
     dto.setFine(p.getFine());
     dto.setResponsabileId(p.getResponsabile().getId());
-    dto.setIndCanc(p.getIndCanc());
+    dto.setIndCanc(p.isIndCanc());
     dto.setModDate(p.getModDate());
 
     // Ora il setter ESISTE e viene trovato
@@ -110,7 +110,7 @@ public ProgettiDto findById(Long id) {
         progetti.setResponsabile(a.get());
 
 
-        progetto.setIndCanc(0);
+        progetto.setIndCanc(false);
         progetto.setModDate(LocalDate.now());
 
         try {

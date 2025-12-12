@@ -39,11 +39,11 @@ public class Progetti {
     //@ColumnDefault("0")
     //@Column(name = "IND_CANC")
     @Column(name = "ind_canc", columnDefinition = "boolean default false")
-
-    private int indCanc;
+    private boolean indCanc;
 
     @ColumnDefault("SYSDATE")
     @Column(name = "MOD_DATE")
     private LocalDate modDate;
+
 
 }
