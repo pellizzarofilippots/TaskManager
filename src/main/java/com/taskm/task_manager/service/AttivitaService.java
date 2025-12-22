@@ -37,23 +37,23 @@ public class AttivitaService {
     }
 
     public List<Attivita> findByProgetto(Long idProgetto) {
-        return repository.findByProgettoId(idProgetto);
+        return repository.findByProgetto_Id(idProgetto);
     }
 
-    public List<Attivita> findByPersona(Long personaId) {
-        return repository.findByPersonaId(personaId);
-    }
+//    public List<Attivita> findByPersona(Long personaId) {
+//        return repository.findByOperatore_Id(personaId);
+//    }
 
     public List<Attivita> findByOperatore(Long operatoreId) {
-        return repository.findByOperatoreId(operatoreId);
+        return repository.findByOperatore_Id(operatoreId);
     }
 
     public List<Attivita> findByStato(Long statoId) {
-        return repository.findByStatoId(statoId);
+        return repository.findByStato_Id(statoId);
     }
 
     public List<Attivita> findByPriorita(Long prioritaId) {
-        return repository.findByPrioritaId(prioritaId);
+        return repository.findByPriorita_Id(prioritaId);
     }
 
     public Attivita salva(Attivita attivita) {
@@ -98,11 +98,11 @@ public class AttivitaService {
         repository.deleteById(id);
     }
 
-    public List<Attivita> findByProgettoAndStato(Long progettoId, Long statoId) {
-        return repository.findByProgettoIdAndStatoId(progettoId, statoId);
-    }
-
-    public List<Attivita> findByProgettoAndPersona(Long progettoId, Long personaId) {
-        return repository.findByProgettoIdAndPersonaId(progettoId, personaId);
-    }
+//    public List<Attivita> findByProgettoAndStato(Long progettoId, Long statoId) {
+//        return repository.findByProgettoIdAndStatoId(progettoId, statoId);
+//    }
+//
+//    public List<Attivita> findByProgettoAndPersona(Long progettoId, Long personaId) {
+//        return repository.findByProgettoIdAndPersonaId(progettoId, personaId);
+//    }
 }

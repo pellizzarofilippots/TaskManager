@@ -9,6 +9,7 @@ import com.taskm.task_manager.repository.RuoliProgettoRepository;
 import jakarta.persistence.Column;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -56,7 +57,10 @@ public class AggiungiPersoneController {
 //
 //
 //    }
-
+@GetMapping("/progetto/{progettoId}")
+public List<ProgettoXAnagrafica> getAssegnazioniByProgetto(@PathVariable Long progettoId) {
+    return progettoXAnagrafica.findByProgettoId(progettoId);
+}
     @PostMapping
     public AssegnazioneDto assegna(@RequestBody AssegnazioneDto assegna) {
         // Recupero progetto e persona

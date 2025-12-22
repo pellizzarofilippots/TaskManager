@@ -38,7 +38,7 @@ public class AttivitaController {
 
     @GetMapping("/persona/{personaId}")
     public ResponseEntity<List<Attivita>> getByPersona(@PathVariable Long personaId) {
-        return ResponseEntity.ok(service.findByPersona(personaId));
+        return ResponseEntity.ok(service.findByOperatore(personaId));
     }
 
     @GetMapping("/operatore/{operatoreId}")

@@ -30,6 +30,6 @@ public class RuoliProgetto {
     //@Column(name = "IND_CANC")
     @Column(name = "ind_canc", columnDefinition = "boolean default false")
 
-    private Long indCanc;
+    private boolean indCanc;
 
 }
