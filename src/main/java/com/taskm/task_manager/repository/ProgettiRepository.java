@@ -1,6 +1,8 @@
 package com.taskm.task_manager.repository;
 
+import com.taskm.task_manager.dto.ProgettiDto;
 import com.taskm.task_manager.model.Progetti;
+import com.taskm.task_manager.model.ProgettoXAnagrafica;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,9 +38,12 @@ public class ProgettiRepository {
     }
 
     @Transactional
-    public void save(Progetti progetti) {
+    public Progetti save(Progetti progetti) {
         em.persist(progetti);
 
 
+        return progetti;
     }
+
+
 }

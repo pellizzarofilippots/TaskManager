@@ -19,10 +19,10 @@ public class Progetti {
     @Column(name = "ID_PROGETTO", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "RESPONSABILE_ID")
-    private Anagrafica responsabile;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @OnDelete(action = OnDeleteAction.RESTRICT)
+//    @JoinColumn(name = "RESPONSABILE_ID")
+//    private Anagrafica responsabile;
 
     @Column(name = "NOME", nullable = false, length = 250)
     private String nome;

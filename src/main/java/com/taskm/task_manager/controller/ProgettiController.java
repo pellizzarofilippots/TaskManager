@@ -35,4 +35,13 @@ public class ProgettiController {
 
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProgettiDto> aggiorna(@PathVariable Long id, @RequestBody ProgettiDto progetto) {
+        ProgettiDto aggiornato = service.aggiorna(id, progetto);
+        if (aggiornato != null) {
+            return ResponseEntity.ok(aggiornato);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }

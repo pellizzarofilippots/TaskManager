@@ -13,4 +13,6 @@ public interface ProgettiXAnagraficaRepository extends JpaRepository<ProgettoXAn
 
         List<ProgettoXAnagrafica> findByProgettoId(Long progettoId);
 
+
+
 }

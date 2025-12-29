@@ -58,8 +58,28 @@ public class AggiungiPersoneController {
 //
 //    }
 @GetMapping("/progetto/{progettoId}")
-public List<ProgettoXAnagrafica> getAssegnazioniByProgetto(@PathVariable Long progettoId) {
-    return progettoXAnagrafica.findByProgettoId(progettoId);
+public List<AssegnazioneDto> getAssegnazioniByProgetto(@PathVariable Long progettoId) {
+  //  return progettoXAnagrafica.findByProgettoId(progettoId);
+    return progettoXAnagrafica.findByProgettoId(progettoId)
+            .stream()
+            .map(a -> {
+                AssegnazioneDto dto = new AssegnazioneDto();
+
+                dto.setProgettoId(a.getProgetto().getId());
+                dto.setPersonaId(a.getPersona().getId());
+                dto.setRuoloId(
+                        a.getRuolo() != null ? a.getRuolo().getId() : null
+                );
+
+                dto.setHasPrgGestisci(a.getHasPrgGestisci());
+                dto.setHasAttAggiungi(a.getHasAttAggiungi());
+                dto.setHasAttAssegna(a.getHasAttAssegna());
+                dto.setHasAttStato(a.getHasAttStato());
+                dto.setHasAttPrendi(a.getHasAttPrendi());
+
+                return dto;
+            })
+            .toList();
 }
     @PostMapping
     public AssegnazioneDto assegna(@RequestBody AssegnazioneDto assegna) {

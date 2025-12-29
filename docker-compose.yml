@@ -136,9 +136,10 @@ services:
 
   task-service:
     build:
-      context: .   # percorso del backend
+      context: .   # percorso del backender
     ports:
       - "8081:8081"
+      -  "5005:5005"
     depends_on:
       postgres:
         condition: service_healthy
@@ -149,6 +150,8 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: none
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_LIQUIBASE_ENABLED: "false"
+      JAVA_TOOL_OPTIONS: >
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     networks:
       - app-network
 

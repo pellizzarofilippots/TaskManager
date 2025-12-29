@@ -39,6 +39,14 @@ public class CustomUserDetails implements UserDetails {
 
     public Long getRuolo(){return utente.getRuolo().getId();}
 
+    public Long getId() {
+        return utente.getId();
+    }
+
+    public Long getAnagraficaId() {
+        return utente.getAnagrafica().getId();  // ← Prende l'ID dall'anagrafica collegata
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

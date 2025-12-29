@@ -96,7 +96,9 @@ public class AuthController {
             return ResponseEntity.ok(Map.of(
                     "token", token,
                     "username", userDetails.getUsername(),
-                    "ruolo", userDetails.getRuolo().toString()
+                    "ruolo", userDetails.getRuolo().toString(),
+                    "anagraficaId", userDetails.getAnagraficaId()
+
             ));
 
         } catch (BadCredentialsException e) {

@@ -52,12 +52,27 @@ public class ProgettiService {
             dto.setDescrizione(p.getDescrizione());
             dto.setInizio(p.getInizio());
             dto.setFine(p.getFine());
-            dto.setResponsabileId(p.getResponsabile().getId());
+            //dto.setResponsabileId(p.getResponsabile().getId());
             dto.setIndCanc(p.isIndCanc());
             dto.setModDate(p.getModDate());
 
-            // Se vuoi popolare le assegnazioni, qui
-            dto.setAssegnazioni(null); // o lista mappata
+            List<ProgettoXAnagrafica> assegnazioniEntity =
+                    progettiXAnagraficaRepository.findByProgettoId(p.getId());
+            List<AssegnazioneDto> assegnazioniDto = assegnazioniEntity.stream()
+                    .map(pxa -> {
+                        AssegnazioneDto aDto = new AssegnazioneDto();
+                        aDto.setPersonaId(pxa.getPersona().getId());
+                        aDto.setRuoloId(pxa.getRuolo() != null ? pxa.getRuolo().getId() : null);
+                        aDto.setHasPrgGestisci(pxa.getHasPrgGestisci());
+                        aDto.setHasAttAggiungi(pxa.getHasAttAggiungi());
+                        aDto.setHasAttAssegna(pxa.getHasAttAssegna());
+                        aDto.setHasAttStato(pxa.getHasAttStato());
+                        aDto.setHasAttPrendi(pxa.getHasAttPrendi());
+                        return aDto;
+                    })
+                    .collect(Collectors.toList());
+
+            dto.setAssegnazioni(assegnazioniDto);
 
             return dto;
         }).collect(Collectors.toList());
@@ -89,7 +104,7 @@ public ProgettiDto findById(Long id) {
     dto.setDescrizione(p.getDescrizione());
     dto.setInizio(p.getInizio());
     dto.setFine(p.getFine());
-    dto.setResponsabileId(p.getResponsabile().getId());
+  //  dto.setResponsabileId(p.getResponsabile().getId());
     dto.setIndCanc(p.isIndCanc());
     dto.setModDate(p.getModDate());
 
@@ -106,8 +121,8 @@ public ProgettiDto findById(Long id) {
         progetti.setDescrizione(progetto.getDescrizione());
         progetti.setInizio(progetto.getInizio());
         progetti.setFine(progetto.getFine());
-        Optional<Anagrafica> a =anagraficaRepository.findById(progetto.getResponsabileId());
-        progetti.setResponsabile(a.get());
+//        Optional<Anagrafica> a =anagraficaRepository.findById(progetto.getResponsabileId());
+       // progetti.setResponsabile(a.get());
 
 
         progetto.setIndCanc(false);
@@ -124,5 +139,49 @@ public ProgettiDto findById(Long id) {
         }
     }
 
+    public ProgettiDto aggiorna(Long id, ProgettiDto progettoDto) {
+        Progetti esistente = repository.findById(id);
+
+        if (esistente == null) {
+            return null;
+        }
+
+        // Aggiorna i campi
+        esistente.setNome(progettoDto.getNome());
+        esistente.setDescrizione(progettoDto.getDescrizione());
+        esistente.setInizio(progettoDto.getInizio());
+        esistente.setFine(progettoDto.getFine());
+
+//        // Se cambia il responsabile
+//        if (progettoDto.getResponsabileId() != null) {
+//            Optional<Anagrafica> responsabile = anagraficaRepository.findById(progettoDto.getResponsabileId());
+//            if (responsabile.isPresent()) {
+//                esistente.setResponsabile(responsabile.get());
+//            }
+//        }
+
+        esistente.setModDate(LocalDate.now());
+
+        try {
+            Progetti salvato = repository.save(esistente);
+
+            // Converti in DTO e ritorna
+            ProgettiDto dto = new ProgettiDto();
+            dto.setId(salvato.getId());
+            dto.setNome(salvato.getNome());
+            dto.setDescrizione(salvato.getDescrizione());
+            dto.setInizio(salvato.getInizio());
+            dto.setFine(salvato.getFine());
+        //    dto.setResponsabileId(salvato.getResponsabile().getId());
+            dto.setIndCanc(salvato.isIndCanc());
+            dto.setModDate(salvato.getModDate());
+            dto.setAssegnazioni(null);
+
+            return dto;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
