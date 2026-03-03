@@ -17,37 +17,19 @@ import java.time.LocalDate;
 })
 public class EmailPersona {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "email_persona_seq")
+    @SequenceGenerator(name = "email_persona_seq", sequenceName = "wksp_taskman.email_persona_seq", allocationSize = 1)
     @Column(name = "ID_RECAPITO", nullable = false)
     private Long id;
 
-    @Column(name = "EMAIL", nullable = false, length = 180)
-    private String email;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "PERSONA_ID", nullable = false)
-    private Anagrafica persona;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "TIPO_ID", nullable = false)
-    private TipiEmail tipo;
-
-    //@ColumnDefault("0")
-    @Column(name = "IS_PEC")
-    private Boolean isPec;
-
-    //@ColumnDefault("0")
-    @Column(name = "IS_SCADUTA")
-    private Boolean isScaduta;
+    // ...existing code...
 
    // @ColumnDefault("0")
     //@Column(name = "IND_CANC")
-    @Column(name = "ind_canc", columnDefinition = "boolean default false")
-
+    @Column(name = "IND_CANC", columnDefinition = "boolean default false")
     private Boolean indCanc;
 
-    @ColumnDefault("SYSDATE")
+    @ColumnDefault("CURRENT_DATE")
     @Column(name = "MOD_DATE", nullable = false)
     private LocalDate modDate;
 

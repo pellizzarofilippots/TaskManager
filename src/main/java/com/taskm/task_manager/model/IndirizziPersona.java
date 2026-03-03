@@ -15,40 +15,20 @@ import java.time.LocalDate;
 @Table(name = "INDIRIZZI_PERSONA", schema = "WKSP_TASKMAN")
 public class IndirizziPersona {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "indirizzi_persona_seq")
+    @SequenceGenerator(name = "indirizzi_persona_seq", sequenceName = "wksp_taskman.indirizzi_persona_seq", allocationSize = 1)
     @Column(name = "ID_RECAPITO", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "PERSONA_ID", nullable = false)
-    private Anagrafica persona;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "TIPO_ID", nullable = false)
-    private TipiIndirizzo tipo;
-
-    @Column(name = "INDIRIZZO", length = 150)
-    private String indirizzo;
-
-    @Column(name = "TELEFONO", length = 20)
-    private String telefono;
-
-    @Column(name = "COD_COMUNE", length = 20)
-    private String codComune;
-
-    @Column(name = "CAP", length = 5)
-    private String cap;
+    // ...existing code...
 
     //@ColumnDefault("0")
     //@Column(name = "IND_CANC")
-    @Column(name = "ind_canc", columnDefinition = "boolean default false")
-
+    @Column(name = "IND_CANC", columnDefinition = "boolean default false")
     private Boolean indCanc;
 
-    @ColumnDefault("SYSDATE")
+    @ColumnDefault("CURRENT_DATE")
     @Column(name = "MOD_DATE", nullable = false)
-
 
     private LocalDate modDate;
 

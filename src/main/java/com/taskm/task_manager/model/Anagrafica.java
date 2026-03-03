@@ -37,8 +37,7 @@ public class Anagrafica {
 
     //@ColumnDefault("0")
     //@Column(name = "IND_CANC")
-    @Column(name = "ind_canc", columnDefinition = "boolean default false")
-
+    @Column(name = "IND_CANC", columnDefinition = "boolean default false")
     private Boolean indCanc;
 
 

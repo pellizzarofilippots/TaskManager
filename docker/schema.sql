@@ -321,6 +321,11 @@ create table wksp_taskman.utenti (
 );
 
 create sequence ruoli_seq start with 1 increment by 1;
+create sequence wksp_taskman.attivita_seq start with 1 increment by 1;
+create sequence wksp_taskman.esecuzione_seq start with 1 increment by 1;
+create sequence wksp_taskman.cellulare_persona_seq start with 1 increment by 1;
+create sequence wksp_taskman.email_persona_seq start with 1 increment by 1;
+create sequence wksp_taskman.indirizzi_persona_seq start with 1 increment by 1;
 
 
 

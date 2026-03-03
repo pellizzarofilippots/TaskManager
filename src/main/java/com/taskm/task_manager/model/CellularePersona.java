@@ -15,29 +15,19 @@ import java.time.LocalDate;
 @Table(name = "CELLULARE_PERSONA", schema = "WKSP_TASKMAN")
 public class CellularePersona {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cellulare_persona_seq")
+    @SequenceGenerator(name = "cellulare_persona_seq", sequenceName = "wksp_taskman.cellulare_persona_seq", allocationSize = 1)
     @Column(name = "ID_RECAPITO", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "PERSONA_ID", nullable = false)
-    private Anagrafica persona;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "TIPO_ID", nullable = false)
-    private TipiCellulare tipo;
-
-    @Column(name = "NUMERO", length = 20)
-    private String numero;
+    // ...existing code...
 
     //@ColumnDefault("0")
     //@Column(name = "IND_CANC")
-    @Column(name = "ind_canc", columnDefinition = "boolean default false")
-
+    @Column(name = "IND_CANC", columnDefinition = "boolean default false")
     private Boolean indCanc;
 
-    @ColumnDefault("SYSDATE")
+    @ColumnDefault("CURRENT_DATE")
     @Column(name = "MOD_DATE", nullable = false)
     private LocalDate modDate;
 
